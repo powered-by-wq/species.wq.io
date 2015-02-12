@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Species</title>
+    {{>head}}
+  </head>
+  <body>
+    <div data-role="page" class="ui-page">
+      <div data-role="header">
+        {{>home}}
+        <h1>Species</h1>
+      </div>
+      <div data-role="content">
+        <ul data-role="listview">
+        {{#list}}
+          <li><a href="/species/{{id}}">{{label}}</a></li>
+        {{/list}}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

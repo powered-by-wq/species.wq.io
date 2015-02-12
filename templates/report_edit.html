@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Submit Report</title>
+    {{>head}}
+  </head>
+  <body>
+    <div data-role="page" class="ui-page">
+      <div data-role="header">
+        {{>home}}
+        <h1>Submit Report</h1>
+      </div>
+      <div class="ui-content" role="main">
+        <form action="/reports/" data-ajax="false" method="post">
+          {{>csrf}}
+        <ul data-role="listview">
+          <li data-role="fieldcontain">
+            <label for="species">Species</label>
+            <select id="species" name="species" required>
+              <option value="">Enter a species...</option>
+            {{#species_list}}
+              <option value="{{id}}">{{label}}</option>
+            {{/species_list}}
+            </select>
+          </li>
+          <li data-role="fieldcontain">
+            <label for="image">Photo</label>
+            <input type="file" name="photo" id="image">
+          </li>
+          <li data-role="fieldcontain">
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date">
+          </li>
+          <li data-role="fieldcontain">
+            <fieldset>
+              <legend>Location Mode</legend>
+              <input type='radio' value='gps' id='loc-gps' name='mode'>
+              <label for='loc-gps'>GPS</label>
+              <input type='radio' value='interactive' id='loc-interactive' name='mode'>
+              <label for='loc-interactive'>Interactive</label>
+              <input type='radio' value='manual' id='loc-manual' name='mode'>
+              <label for='loc-manual'>Manual</label>
+            </fieldset>
+          </li>
+          <li data-role="fieldcontain">
+            <div id="report-new-map" style="height:300px;"></div>
+          </li>
+          <li data-role="fieldcontain">
+            <label for="longitude">Longitude</label>
+            <input id="longitude" name="longitude" type="tel">
+          </li>
+          <li data-role="fieldcontain">
+            <label for="latitude">Latitude</label>
+            <input id="latitude" name="latitude" type="tel">
+          </li>
+          <li data-role="fieldcontain">
+            <label for="accuracy">Accuracy</label>
+            <input id="accuracy" name="accuracy" type="tel">
+          </li>
+          <li data-role="fieldcontain">
+            <label for="notes">Notes</label>
+            <textarea name="notes" id="notes"></textarea>
+          </li>
+          <li><p class="error report-errors"></p></li>
+          <li>
+            <div class="ui-grid-a">
+              <div class="ui-block-a">
+                <a href="/" data-role="button">Cancel</a>
+              </div>
+              <div class="ui-block-b">
+                <button type="submit" data-theme="b">Submit</button>
+              </div>
+            </div>
+          </div>
+        </ul>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{species_label}}</title>
+    <meta name="twitter:card" content="photo" />
+    <meta name="twitter:site" content="@wq_framework" />
+    <meta name="twitter:creator" content="@wq_framework" />
+    <meta name="twitter:image:src" content="http://species.wq.io/media/{{photo}}" />
+    {{>head}}
+  </head>
+  <body>
+    <div data-role="page" class="ui-page">
+      <div data-role="header">
+        {{>home}}  
+        <h1>{{species_label}}</h1>
+      </div>
+      <div data-role="content">
+        <h3>{{species_label}} on {{date}}</h3>
+        <p>{{notes}}</p>
+        
+        <div id="report-{{id}}-map" style="height:300px;border:1px solid black"></div>
+        <img src="/media/{{photo}}" style="max-width:100%">
+        <ul data-role="listview">
+          <li><a href="/species/{{species_id}}/reports">See all {{species_label}} reports</a></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
