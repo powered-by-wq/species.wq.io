@@ -11,7 +11,11 @@
         <h1>Submit Report</h1>
       </div>
       <div class="ui-content" role="main">
-        <form action="/reports/" data-ajax="false" method="post">
+        <form action="/reports/" data-ajax="false" method="post"
+            {{#outbox_id}}
+            data-wq-outbox-id="{{outbox_id}}"
+            data-wq-outbox-preserve="photo"
+            {{/outbox_id}}>
           {{>csrf}}
         <ul data-role="listview">
           <li data-role="fieldcontain">
@@ -19,27 +23,39 @@
             <select id="species" name="species_id" required>
               <option value="">Enter a species...</option>
             {{#species_list}}
-              <option value="{{id}}">{{label}}</option>
+              <option value="{{id}}"{{#selected}} selected{{/selected}}>
+                {{label}}
+              </option>
             {{/species_list}}
             </select>
+            <p class="error report-species-errors"></p>
           </li>
           <li data-role="fieldcontain">
             <label for="image">Photo</label>
+            {{#photo.name}}
+            <input type="text" id="image" disabled
+                value="{{photo.name}} ({{photo.type}}, {{photo.body.size}} bytes)">
+            {{/photo.name}}
+            {{^photo.name}}
             <input type="file" name="photo" id="image">
+            {{/photo.name}}
+            <p class="error report-photo-errors"></p>
           </li>
           <li data-role="fieldcontain">
             <label for="date">Date</label>
-            <input type="date" name="date" id="date">
+            <input type="date" name="date" id="date" value="{{date}}">
+            <p class="error report-date-errors"></p>
           </li>
-          <li data-role="fieldcontain">
-            <fieldset>
+          <li data-role="fieldcontain"{{#outbox_id}}style="display:none"{{/outbox_id}}>
+            <fieldset data-role="controlgroup">
               <legend>Location Mode</legend>
               <input type='radio' value='gps' id='loc-gps' name='mode'>
-              <label for='loc-gps'>GPS</label>
+              <label for='loc-gps'>GPS Lookup</label>
               <input type='radio' value='interactive' id='loc-interactive' name='mode'>
-              <label for='loc-interactive'>Interactive</label>
-              <input type='radio' value='manual' id='loc-manual' name='mode'>
-              <label for='loc-manual'>Manual</label>
+              <label for='loc-interactive'>Point on Map</label>
+              <input type='radio' value='manual' id='loc-manual' name='mode'
+                {{#outbox_id}}checked{{/outbox_id}}>
+              <label for='loc-manual'>Enter Cordinates</label>
             </fieldset>
           </li>
           <li data-role="fieldcontain">
@@ -47,19 +63,23 @@
           </li>
           <li data-role="fieldcontain">
             <label for="longitude">Longitude</label>
-            <input id="longitude" name="longitude" type="tel">
+            <input id="longitude" name="longitude" value="{{longitude}}" type="tel">
+            <p class="error report-longitude-errors"></p>
           </li>
           <li data-role="fieldcontain">
             <label for="latitude">Latitude</label>
-            <input id="latitude" name="latitude" type="tel">
+            <input id="latitude" name="latitude" value="{{latitude}}" type="tel">
+            <p class="error report-latitude-errors"></p>
           </li>
           <li data-role="fieldcontain">
             <label for="accuracy">Accuracy</label>
-            <input id="accuracy" name="accuracy" type="tel">
+            <input id="accuracy" name="accuracy" value="{{accuracy}}" type="tel">
+            <p class="error report-accuracy-errors"></p>
           </li>
           <li data-role="fieldcontain">
             <label for="notes">Notes</label>
-            <textarea name="notes" id="notes"></textarea>
+            <textarea name="notes" id="notes">{{notes}}</textarea>
+            <p class="error report-notes-errors"></p>
           </li>
           <li><p class="error report-errors"></p></li>
           <li>

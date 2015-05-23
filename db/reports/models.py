@@ -16,9 +16,12 @@ class Report(models.Model):
     longitude = models.FloatField()
     accuracy = models.FloatField()
     species = models.ForeignKey(Species)
-    notes = models.TextField()
+    notes = models.TextField(null=True, blank=True)
 
     def __str__(self):
         if not self.id:
             return "New Report"
         return "%s on %s" % (self.species, self.date)
+
+    class Meta:
+        ordering = ['-date', '-pk']

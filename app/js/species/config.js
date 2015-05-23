@@ -1,8 +1,11 @@
-define(["data/config", "data/version"],
-function(config, version) {
+define(["data/config", "data/templates", "data/version"],
+function(config, templates, version) {
 
-config.defaults = {
-    'version': version
+config.template = {
+    'templates': templates,
+    'defaults': {
+        'version': version
+    }
 };
 
 config.transitions = {
@@ -11,8 +14,7 @@ config.transitions = {
 };
 
 config.map = {
-    'zoom': 12,
-    'center': [45.3, -107.5]
+    'bounds': [[44.8, -108], [45.8, -107]]
 };
 
 return config;

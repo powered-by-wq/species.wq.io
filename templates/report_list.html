@@ -5,13 +5,29 @@
     {{>head}}
   </head>
   <body>
-    <div data-role="page" class="ui-page">
+    <div data-role="page" class="ui-page" data-wq-sync-refresh="true">
       <div data-role="header">
         {{>home}}
         <h1>Reports</h1>
       </div>
       <div data-role="content">
         <ul data-role="listview">
+        {{#unsynced}}
+          <li data-role="list-divider">Outbox</li>
+          {{#unsyncedItems}}
+          <li {{#error}}data-icon="alert"{{/error}}><a href="/outbox/{{id}}/edit">
+            {{#data}}{{species_id}} on {{date}}{{/data}}
+          </a></li>
+          {{/unsyncedItems}}
+          <li>
+            <button class="sync" data-icon="refresh"
+                onclick="require('wq/app').sync(true)">
+              {{#syncing}}Syncing...{{/syncing}}
+              {{^syncing}}Sync Now{{/syncing}}
+            </button>
+          </li>
+          <li data-role="list-divider">Existing Items</li>
+        {{/unsynced}}
         {{#list}}
           <li><a href="/reports/{{id}}">{{label}}</a></li>
         {{/list}}

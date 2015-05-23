@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 # wq: SECRET_KEY, DEBUG and TEMPLATE_DEBUG are defined in local_settings.py
 
-ALLOWED_HOSTS = ["species"]
+ALLOWED_HOSTS = ["species.wq.io"]
 
 
 # Application definition
