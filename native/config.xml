@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "io.wq.species"
+    version     = "{{version}}" >
+
+  <name>Species Tracker</name>
+  <description>
+    A prototype Citizen Science app for species monitoring.
+  </description>
+
+  <author href="https://wq.io" email="andrew@wq.io">
+    S. Andrew Sheppard
+  </author>
+
+  <gap:platform name="android" />
+
+</widget>

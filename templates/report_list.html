@@ -15,10 +15,10 @@
         {{#unsynced}}
           <li data-role="list-divider">Outbox</li>
           {{#unsyncedItems}}
-          <li {{#error}}data-icon="alert"{{/error}}><a href="/outbox/{{id}}/edit">
+          <li {{#error}}data-icon="alert"{{/error}}><a href="{{router_info.base_url}}/outbox/{{id}}/edit">
             {{#data}}
             {{#photo}}<img src="{{image_url}}">{{/photo}}
-            {{^photo}}<img src="/images/empty.png">{{/photo}}
+            {{^photo}}<img src="{{router_info.base_url}}/images/empty.png">{{/photo}}
             {{species_id}} on {{date}}
             {{/data}}
           </a></li>
@@ -33,9 +33,9 @@
           <li data-role="list-divider">Existing Items</li>
         {{/unsynced}}
         {{#list}}
-          <li><a href="/reports/{{id}}">
-            {{#photo}}<img src="/media/160/{{photo}}">{{/photo}}
-            {{^photo}}<img src="/images/empty.png">{{/photo}}
+          <li><a href="{{router_info.base_url}}/reports/{{id}}">
+            {{#photo}}<img src="{{app_config.store.service}}/media/160/{{photo}}">{{/photo}}
+            {{^photo}}<img src="{{router_info.base_url}}/images/empty.png">{{/photo}}
             {{label}}
           </a></li>
         {{/list}}

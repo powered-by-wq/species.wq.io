@@ -12,16 +12,21 @@
       </div>
       <div data-role="content">
         <ul data-role="listview">
-          <li><a href="/reports/new">Share Report</a></li>
-          <li><a href="/reports">See Reports</a></li>
-          <li><a href="/species">Species Description</a></li>
+          <li><a href="{{router_info.base_url}}/reports/new">Share Report</a></li>
+          <li><a href="{{router_info.base_url}}/reports">See Reports</a></li>
+          <li><a href="{{router_info.base_url}}/species">Species Description</a></li>
         </ul>
         <p>Version {{version}}</p>
-        <p style="text-align:center"><a href="https://github.com/powered-by-wq/species.wq.io">Source Code</a></p>
+        <p style="text-align:center">
+          <a target="_blank" href="https://github.com/powered-by-wq/species.wq.io">
+            Source Code
+          </a>
+        </p>
         <p style="text-align:center;color:#999">
           Powered By
-	  <a href="https://wq.io">
-            <img src="/images/wq.png" style="width:32px;height:32px;vertical-align:middle;"i>
+	  <a target="_blank" href="https://wq.io/">
+            <img src="{{router_info.base_url}}/images/wq.png"
+                 style="width:32px;height:32px;vertical-align:middle;">
           </a>
 	</p>
       </div>

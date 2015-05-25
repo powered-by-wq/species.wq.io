@@ -1,7 +1,9 @@
 define(['jquery', 'leaflet', 'wq/app', 'wq/map', 'wq/router',
         'wq/locate', 'wq/photos', './config'],
 function($, L, app, map, router, locate, photos, config) {
-L.Icon.Default.imagePath = "/css/lib/images";
+
+var base_url = config.router && config.router.base_url || '';
+L.Icon.Default.imagePath = base_url + "/css/lib/images";
 
 config.presync = function() {
     $('button.sync').html("Syncing...");

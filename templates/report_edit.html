@@ -11,7 +11,7 @@
         <h1>Submit Report</h1>
       </div>
       <div class="ui-content" role="main">
-        <form action="/reports/" data-ajax="false" method="post"
+        <form action="{{router_info.base_url}}/reports/" data-ajax="false" method="post"
             {{#outbox_id}}
             data-wq-outbox-id="{{outbox_id}}"
             data-wq-outbox-preserve="photo"
@@ -32,7 +32,7 @@
           </li>
           <li data-role="fieldcontain">
             {{^photo}}
-            <img src="/images/empty.png" id="preview">
+            <img src="{{router_info.base_url}}/images/empty.png" id="preview">
             <label for="image">Photo</label>
             <input type="file" name="photo" id="image"
                onchange="require('wq/photos').preview('preview', this.files[0]);">
@@ -89,7 +89,7 @@
           <li>
             <div class="ui-grid-a">
               <div class="ui-block-a">
-                <a href="/" data-role="button">Cancel</a>
+                <a href="{{router_info.base_url}}/" data-role="button">Cancel</a>
               </div>
               <div class="ui-block-b">
                 <button type="submit" data-theme="b">Submit</button>

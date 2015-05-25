@@ -20,9 +20,9 @@
         
         <div id="report-{{id}}-map" style="height:300px;border:1px solid black"></div>
         <hr>
-        <img src="/media/1024/{{photo}}" style="max-width:100%">
+        <img src="{{app_config.store.service}}/media/1024/{{photo}}" style="max-width:100%">
         <ul data-role="listview" data-inset="true">
-          <li><a href="/species/{{species_id}}/reports">See all {{species_label}} reports</a></li>
+          <li><a href="{{router_info.base_url}}/species/{{species_id}}/reports">See all {{species_label}} reports</a></li>
         </ul>
       </div>
     </div>
