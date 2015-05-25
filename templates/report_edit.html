@@ -31,14 +31,18 @@
             <p class="error report-species-errors"></p>
           </li>
           <li data-role="fieldcontain">
+            {{^photo}}
+            <img src="/images/empty.png" id="preview">
             <label for="image">Photo</label>
-            {{#photo.name}}
+            <input type="file" name="photo" id="image"
+               onchange="require('wq/photos').preview('preview', this.files[0]);">
+            {{/photo}}
+            {{#photo}}
+            <img src="{{image_url}}">
+            <label for="image">Photo</label>
             <input type="text" id="image" disabled
-                value="{{photo.name}} ({{photo.type}}, {{photo.body.size}} bytes)">
-            {{/photo.name}}
-            {{^photo.name}}
-            <input type="file" name="photo" id="image">
-            {{/photo.name}}
+                value="{{name}} ({{type}}, {{body.size}} bytes)">
+            {{/photo}}
             <p class="error report-photo-errors"></p>
           </li>
           <li data-role="fieldcontain">

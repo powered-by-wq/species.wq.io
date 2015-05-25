@@ -1,5 +1,6 @@
-define(['jquery', 'leaflet', 'wq/router', 'wq/locate', 'wq/app', 'wq/map', './config'],
-function($, L, router, locate, app, map ,config) {
+define(['jquery', 'leaflet', 'wq/app', 'wq/map', 'wq/router',
+        'wq/locate', 'wq/photos', './config'],
+function($, L, app, map, router, locate, photos, config) {
 L.Icon.Default.imagePath = "/css/lib/images";
 
 config.presync = function() {
@@ -12,6 +13,7 @@ config.postsync = function(items) {
 
 app.init(config).then(function() {
     map.init(config.map);
+    photos.init();
     router.addRoute('reports/new', 's', _locatorMap);
     router.addRoute('outbox/<slug>/edit', 's', _locatorMap);
     app.jqmInit();

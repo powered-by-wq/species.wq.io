@@ -62,6 +62,7 @@ from wq.db.default_settings import (
     REST_FRAMEWORK,
     SOCIAL_AUTH_PIPELINE,
 )
+REST_FRAMEWORK['UPLOADED_FILES_USE_URL'] = False
 
 # wq: Recommended settings unique to wq.db
 from wq.db.default_settings import (
