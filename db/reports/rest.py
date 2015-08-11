@@ -1,6 +1,7 @@
 from wq.db import rest
 from wq.db.patterns import rest as patterns
 from .models import Report, Species
+from .serializers import ReportSerializer
 from .views import ReportViewSet
 
 rest.router.register_model(
@@ -9,6 +10,7 @@ rest.router.register_model(
 )
 rest.router.register_model(
     Report,
+    serializer=ReportSerializer,
     viewset=ReportViewSet,
     reversed=True
 )

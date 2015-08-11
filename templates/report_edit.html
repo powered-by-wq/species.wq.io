@@ -14,7 +14,7 @@
         <form action="{{router_info.base_url}}/reports/" data-ajax="false" method="post"
             {{#outbox_id}}
             data-wq-outbox-id="{{outbox_id}}"
-            data-wq-outbox-preserve="photo"
+            data-wq-outbox-preserve="photos"
             {{/outbox_id}}>
           {{>csrf}}
         <ul data-role="listview">
@@ -30,37 +30,24 @@
             </select>
             <p class="error report-species-errors"></p>
           </li>
+          {{^photos}}
+          {{>new_photo}}
+          <li>
+             <button type="button" data-icon="plus"
+                     onclick="require('species/main').addPhoto.call(this);">
+                Add Another Photo
+             </button>
+          </li>
+          {{/photos}}
+          {{#photos}}
           <li data-role="fieldcontain">
-            {{^photo}}
-            <img src="{{router_info.base_url}}/images/empty.png" id="preview">
-            <label for="image">Photo</label>
-            {{#native}}
-            <input type="hidden" name="photo" id="image"
-                   data-wq-type="file" data-wq-preview="preview">
-            <div>
-              <button type="button" data-inline="true" data-icon="camera"
-                 data-wq-action="take" data-wq-input="image">
-                 Camera
-              </button>
-              <button type="button" data-inline="true" data-icon="grid"
-                 data-wq-action="pick" data-wq-input="image">
-                 Gallery
-              </button>
-            </div>
-            {{/native}}
-            {{^native}}
-            <input type="file" name="photo" id="image"
-                   data-wq-preview="preview">
-            {{/native}}
-            {{/photo}}
-            {{#photo}}
             <img src="{{image_url}}">
             <label for="image">Photo</label>
             <input type="text" id="image" disabled
                 value="{{name}} ({{type}}, {{body.size}} bytes)">
-            {{/photo}}
             <p class="error report-photo-errors"></p>
           </li>
+          {{/photos}}
           <li data-role="fieldcontain">
             <label for="date">Date</label>
             <input type="date" name="date" id="date" value="{{date}}">

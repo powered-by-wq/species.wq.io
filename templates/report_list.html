@@ -17,8 +17,8 @@
           {{#unsyncedItems}}
           <li {{#error}}data-icon="alert"{{/error}}><a href="{{router_info.base_url}}/outbox/{{id}}/edit">
             {{#data}}
-            {{#photo}}<img src="{{image_url}}">{{/photo}}
-            {{^photo}}<img src="{{router_info.base_url}}/images/empty.png">{{/photo}}
+            {{#first_photo}}<img src="{{image_url}}">{{/first_photo}}
+            {{^first_photo}}<img src="{{router_info.base_url}}/images/empty.png">{{/first_photo}}
             {{species_id}} on {{date}}
             {{/data}}
           </a></li>
@@ -44,8 +44,8 @@
         {{/unsynced}}
         {{#list}}
           <li><a href="{{router_info.base_url}}/reports/{{id}}">
-            {{#photo}}<img src="{{app_config.store.service}}/media/160/{{photo}}">{{/photo}}
-            {{^photo}}<img src="{{router_info.base_url}}/images/empty.png">{{/photo}}
+            {{#first_photo}}<img src="{{app_config.store.service}}/media/160/{{.}}">{{/first_photo}}
+            {{^first_photo}}<img src="{{router_info.base_url}}/images/empty.png">{{/first_photo}}
             {{label}}
           </a></li>
         {{/list}}

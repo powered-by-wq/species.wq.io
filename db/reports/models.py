@@ -1,5 +1,7 @@
 from django.db import models
 from wq.db.patterns import models as patterns
+from wq.db.contrib.files.models import BaseFileAttachment
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class Species(patterns.IdentifiedModel):
@@ -9,8 +11,12 @@ class Species(patterns.IdentifiedModel):
         verbose_name_plural = "species"
 
 
+class Photo(BaseFileAttachment):
+    pass
+
+
 class Report(models.Model):
-    photo = models.ImageField(null=True, blank=True)
+    photos = GenericRelation(Photo)
     date = models.DateField()
     latitude = models.FloatField()
     longitude = models.FloatField()

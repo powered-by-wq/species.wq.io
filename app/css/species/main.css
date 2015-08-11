@@ -2,3 +2,7 @@ p.error {
   clear: both;
   color: #900;
 }
+li.ui-field-contain.photo-li .ui-input-text {
+  width: 20em;
+  max-width: 80%;
+}

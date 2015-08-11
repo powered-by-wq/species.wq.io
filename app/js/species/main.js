@@ -1,6 +1,6 @@
 define(['jquery', 'leaflet', 'wq/app', 'wq/map', 'wq/router',
-        'wq/locate', 'wq/photos', './config'],
-function($, L, app, map, router, locate, photos, config) {
+        'wq/locate', 'wq/photos', 'wq/template', './config'],
+function($, L, app, map, router, locate, photos, tmpl, config) {
 
 config.presync = function() {
     $('button.sync').html("Syncing...");
@@ -36,6 +36,21 @@ function _locatorMap(match, ui, params, hash, evt, $page) {
 
     var locator = locate.locator(m, fields);
 }
+
+return {
+    'addPhoto': function() {
+        var $newPhoto = $(tmpl.render("{{>new_photo}}", {
+            'rowid': $.mobile.activePage.find('.photo-li').length,
+            'deletable': true
+        }));
+        $(this).parents('li').before($newPhoto);
+        $newPhoto.enhanceWithin();
+        $newPhoto.parents('ul').listview('refresh');
+        $newPhoto.find('button.photo-li-delete').on('click', function() {
+            $newPhoto.remove();
+        });
+    }
+};
 
 });
 

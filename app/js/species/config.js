@@ -6,7 +6,14 @@ var overrides = module.config();
 config.template = {
     'templates': templates,
     'defaults': {
-        'version': version
+        'version': version,
+        'first_photo': function() {
+            if (this.photos && this.photos.length) {
+                return this.photos[0];
+            } else {
+                return this.photos;
+            }
+        }
     }
 };
 

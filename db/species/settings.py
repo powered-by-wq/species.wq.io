@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'wq.db.patterns.identify',
     'wq.db.rest',
     'wq.db.rest.auth',
+    'wq.db.contrib.files',
 
     'reports',
 )

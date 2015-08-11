@@ -5,7 +5,7 @@
     <meta name="twitter:card" content="photo" />
     <meta name="twitter:site" content="@wq_framework" />
     <meta name="twitter:creator" content="@wq_framework" />
-    <meta name="twitter:image:src" content="http://species.wq.io/media/{{photo}}" />
+    <meta name="twitter:image:src" content="http://species.wq.io/media/{{first_photo}}" />
     {{>head}}
   </head>
   <body>
@@ -20,7 +20,9 @@
         
         <div id="report-{{id}}-map" style="height:300px;border:1px solid black"></div>
         <hr>
-        <img src="{{app_config.store.service}}/media/1024/{{photo}}" style="max-width:100%">
+        {{#photos}}
+        <img src="{{app_config.store.service}}/media/1024/{{file}}" style="max-width:100%">
+        {{/photos}}
         <ul data-role="listview" data-inset="true">
           <li><a href="{{router_info.base_url}}/species/{{species_id}}/reports">See all {{species_label}} reports</a></li>
         </ul>

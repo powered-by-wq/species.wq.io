@@ -1,0 +1,31 @@
+<li class="ui-field-contain photo-li">
+  <img src="{{router_info.base_url}}/images/empty.png" id="preview{{rowid}}">
+  {{#deletable}}
+  <div style="float:right">
+  <button type="button" data-icon="delete" data-iconpos="notext"
+          class="photo-li-delete">
+    Delete
+  </button>
+  </div>
+  {{/deletable}}
+  <label for="image{{rowid}}">Photo</label>
+  {{#native}}
+  <input type="hidden" name="photos" id="image{{rowid}}"
+         data-wq-type="file" data-wq-preview="preview{{rowid}}">
+  <div>
+    <button type="button" data-inline="true" data-icon="camera"
+       data-wq-action="take" data-wq-input="image{{rowid}}">
+       Camera
+    </button>
+    <button type="button" data-inline="true" data-icon="grid"
+       data-wq-action="pick" data-wq-input="image{{rowid}}">
+       Gallery
+    </button>
+  </div>
+  {{/native}}
+  {{^native}}
+  <input type="file" name="photos" id="image{{rowid}}"
+         data-wq-preview="preview{{rowid}}">
+  {{/native}}
+  <p class="error report-photos-errors"></p>
+</li>
