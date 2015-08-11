@@ -4,7 +4,7 @@
 set -e
 
 if [ -z "$1" -o -z "$2" -o -z "$3" ]; then
-   echo "Usage: ./phonegap-build.sh VERSION APPID CREDENTIALS";
+   echo "Usage: ./phonegap-build.sh VERSION APPID CREDENTIALS CROSSWALK";
    exit;
 fi;
 
@@ -12,8 +12,9 @@ VERSION=$1
 API=https://build.phonegap.com/api/v1/
 APPID=$2
 CREDENTIALS=$3
+CROSSWALK=$4
 CONFIG=`curl -s http://species.wq.io/config.json`
-CONTEXT="--context {\"version\":\"$VERSION\"}"
+CONTEXT="--context {\"version\":\"$VERSION\",\"crosswalk\":\"$CROSSWALK\"}"
 
 # Build javascript with wq.app
 cd ../app

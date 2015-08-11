@@ -24,11 +24,21 @@
           </a></li>
           {{/unsyncedItems}}
           <li>
-            <button class="sync" data-icon="refresh"
-                onclick="require('wq/app').sync(true)">
-              {{#syncing}}Syncing...{{/syncing}}
-              {{^syncing}}Sync Now{{/syncing}}
-            </button>
+            <div class="ui-grid-a">
+              <div class="ui-block-a">
+                <button class="sync" data-icon="refresh"
+                    onclick="require('wq/app').sync(true);">
+                  {{#syncing}}Syncing...{{/syncing}}
+                  {{^syncing}}Sync Now{{/syncing}}
+                </button>
+              </div>
+              <div class="ui-block-b">
+                <button type="button" data-icon="delete"
+                    onclick="require('wq/app').emptyOutbox();">
+                  Discard
+                </button>
+              </div>
+            </div>
           </li>
           <li data-role="list-divider">Existing Items</li>
         {{/unsynced}}

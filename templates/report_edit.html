@@ -34,8 +34,23 @@
             {{^photo}}
             <img src="{{router_info.base_url}}/images/empty.png" id="preview">
             <label for="image">Photo</label>
+            {{#native}}
+            <input type="hidden" data-wq-type="file" name="photo" id="image">
+            <div>
+              <button type="button" data-inline="true" data-icon="camera"
+                 onclick="require('wq/photos').take('image', 'preview')">
+                 Camera
+              </button>
+              <button type="button" data-inline="true" data-icon="grid"
+                 onclick="require('wq/photos').pick('image', 'preview')">
+                 Gallery
+              </button>
+            </div>
+            {{/native}}
+            {{^native}}
             <input type="file" name="photo" id="image"
                onchange="require('wq/photos').preview('preview', this.files[0]);">
+            {{/native}}
             {{/photo}}
             {{#photo}}
             <img src="{{image_url}}">

@@ -13,6 +13,19 @@
     S. Andrew Sheppard
   </author>
 
+  <preference name='phonegap-version' value='cli-5.1.1' />
+  <preference name="permissions" value="none" />
+
   <gap:platform name="android" />
+
+  <gap:plugin name="org.apache.cordova.camera" source='pgb' />
+  <gap:plugin name="org.apache.cordova.geolocation" source='pgb' />
+
+  {{#crosswalk}}
+  <gap:plugin name='org.crosswalk.engine' version='1.3.0' source='pgb' />
+  {{/crosswalk}}
+
+  <gap:plugin name="cordova-plugin-whitelist" source="npm" />
+  <access origin="*" />
 
 </widget>
