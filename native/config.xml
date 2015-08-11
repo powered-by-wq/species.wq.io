@@ -15,6 +15,7 @@
 
   <preference name='phonegap-version' value='cli-5.1.1' />
   <preference name="permissions" value="none" />
+  <preference name="android-installLocation" value="auto" />
 
   <gap:platform name="android" />
 

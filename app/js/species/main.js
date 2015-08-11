@@ -2,9 +2,6 @@ define(['jquery', 'leaflet', 'wq/app', 'wq/map', 'wq/router',
         'wq/locate', 'wq/photos', './config'],
 function($, L, app, map, router, locate, photos, config) {
 
-var base_url = config.router && config.router.base_url || '';
-L.Icon.Default.imagePath = base_url + "/css/lib/images";
-
 config.presync = function() {
     $('button.sync').html("Syncing...");
 };
@@ -13,9 +10,9 @@ config.postsync = function(items) {
     app.syncRefresh(items);
 };
 
+app.use(map);
+app.use(photos);
 app.init(config).then(function() {
-    map.init(config.map);
-    photos.init();
     router.addRoute('reports/new', 's', _locatorMap);
     router.addRoute('outbox/<slug>/edit', 's', _locatorMap);
     app.jqmInit();
