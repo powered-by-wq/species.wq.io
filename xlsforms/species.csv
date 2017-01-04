@@ -1,0 +1,7 @@
+survey
+,type,name,label,required,constraint
+,string,name,Name,yes,wq:length(255)
+,string,slug,URL Slug,yes,wq:length(50)
+settings
+,instance_name
+,concat(${name})

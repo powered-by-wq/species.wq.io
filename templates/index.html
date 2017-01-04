@@ -3,6 +3,7 @@
   <head>
     <title>Species Tracker</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
     {{>head}}
   </head>
   <body>
@@ -10,12 +11,19 @@
       <div data-role="header">
         <h1>Species Tracker</h1>
       </div>
-      <div data-role="content">
-        <ul data-role="listview">
-          <li><a href="{{router_info.base_url}}/reports/new">Share Report</a></li>
-          <li><a href="{{router_info.base_url}}/reports">See Reports</a></li>
-          <li><a href="{{router_info.base_url}}/species">Species Description</a></li>
+      <div role="main" class="ui-content">
+        <ul data-role="listview" data-inset="true">
+          <li data-icon="plus">
+            <a href="{{rt}}/reports/new">Share Report</a>
+          </li>
+          <li data-icon="bullets">
+            <a href="{{rt}}/reports">See Reports</a>
+          </li>
+          <li>
+            <a href="{{rt}}/species">Species Descriptions</a>
+          </li>
         </ul>
+        <div class="map detail-map" id="index-map"></div>
         <p>Version {{version}}</p>
         <p style="text-align:center">
           <a target="_blank" href="https://github.com/powered-by-wq/species.wq.io">
@@ -25,7 +33,7 @@
         <p style="text-align:center;color:#999">
           Powered By
 	  <a target="_blank" href="https://wq.io/">
-            <img src="{{router_info.base_url}}/images/wq.png"
+            <img src="{{rt}}/images/wq.png"
                  style="width:32px;height:32px;vertical-align:middle;">
           </a>
 	</p>

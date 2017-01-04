@@ -8,9 +8,9 @@ optimize:
     optimize: none
     modules:
          -
-            name: "species"
+            name: "speciestracker"
     paths:
-        species: "../species"
+        speciestracker: "../speciestracker"
         data: ../data
 
 # Generate AMD-wrapped JSON fixtures
@@ -37,11 +37,15 @@ setversion:
 
 # Generate Application Cache manifest
 appcache:
-    name: "species.appcache"
-    css: "css/species.css"
+    name: "speciestracker.appcache"
+    css: "css/speciestracker.css"
     css-ignore: "css/lib/images/icons-png/.*"
     cache:
          - js/lib/require.js
+         - css/lib/images/marker-icon.png
+         - css/lib/images/marker-icon-2x.png
+         - css/lib/images/marker-shadow.png
+         - images/empty.png
     network:
          - "*"
          - "http://*"

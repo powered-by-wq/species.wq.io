@@ -1,0 +1,21 @@
+survey
+,type,name,label,required,constraint
+,string,species,Species,yes,wq:ForeignKey("species.Species")
+,date,date,Date,yes,
+,select1 loc_choices,toggle,Location Mode,,
+,geopoint,geometry,Location,yes,
+,decimal,latitude,Latitude,,
+,decimal,longitude,Longitude,,
+,decimal,accuracy,GPS Accuracy,,
+,text,notes,Notes,,
+,begin repeat,photos,Photos,,
+,image,file,Photo,,
+,end repeat,,,,
+choices
+,list name,name,label
+,loc_choices,gps,Use GPS
+,loc_choices,interactive,Point on Map
+,loc_choices,manual,Enter Manually
+settings
+,instance_name
+,"concat(${species.name},' on ',${date})"

@@ -1,105 +1,145 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Submit Report</title>
+    <title>{{^id}}Add{{/id}}{{#id}}Edit{{/id}} report</title>
     {{>head}}
   </head>
   <body>
-    <div data-role="page" class="ui-page">
+    <div data-role="page">
       <div data-role="header">
         {{>home}}
-        <h1>Submit Report</h1>
+        <h1>{{^id}}Add{{/id}}{{#id}}Edit{{/id}} report</h1>
       </div>
-      <div class="ui-content" role="main">
-        <form action="{{router_info.base_url}}/reports/" data-ajax="false" method="post"
+      <div role="main" class="ui-content">
+        <form action="{{svc}}/reports/{{id}}" method="post" data-ajax="false"
+            data-wq-json="true"
             {{#outbox_id}}
-            data-wq-outbox-id="{{outbox_id}}"
-            data-wq-outbox-preserve="photos"
+              data-wq-outbox-id="{{outbox_id}}"
+              data-wq-outbox-preserve=""
             {{/outbox_id}}>
           {{>csrf}}
-        <ul data-role="listview">
-          <li data-role="fieldcontain">
-            <label for="species">Species</label>
-            <select id="species" name="species_id" required>
-              <option value="">Enter a species...</option>
-            {{#species_list}}
-              <option value="{{id}}"{{#selected}} selected{{/selected}}>
-                {{label}}
-              </option>
-            {{/species_list}}
-            </select>
-            <p class="error report-species-errors"></p>
-          </li>
-          {{^photos}}
-          {{>new_photo}}
-          <li>
-             <button type="button" data-icon="plus"
-                     onclick="require('species/main').addPhoto.call(this);">
-                Add Another Photo
-             </button>
-          </li>
-          {{/photos}}
-          {{#photos}}
-          <li data-role="fieldcontain">
-            <img src="{{image_url}}">
-            <label for="image">Photo</label>
-            <input type="text" id="image" disabled
-                value="{{name}} ({{type}}, {{body.size}} bytes)">
-            <p class="error report-photo-errors"></p>
-          </li>
-          {{/photos}}
-          <li data-role="fieldcontain">
-            <label for="date">Date</label>
-            <input type="date" name="date" id="date" value="{{date}}">
-            <p class="error report-date-errors"></p>
-          </li>
-          <li data-role="fieldcontain"{{#outbox_id}}style="display:none"{{/outbox_id}}>
-            <fieldset data-role="controlgroup">
-              <legend>Location Mode</legend>
-              <input type='radio' value='gps' id='loc-gps' name='mode'>
-              <label for='loc-gps'>GPS Lookup</label>
-              <input type='radio' value='interactive' id='loc-interactive' name='mode'>
-              <label for='loc-interactive'>Point on Map</label>
-              <input type='radio' value='manual' id='loc-manual' name='mode'
-                {{#outbox_id}}checked{{/outbox_id}}>
-              <label for='loc-manual'>Enter Cordinates</label>
-            </fieldset>
-          </li>
-          <li data-role="fieldcontain">
-            <div id="report-new-map" style="height:300px;"></div>
-          </li>
-          <li data-role="fieldcontain">
-            <label for="longitude">Longitude</label>
-            <input id="longitude" name="longitude" value="{{longitude}}" type="tel">
-            <p class="error report-longitude-errors"></p>
-          </li>
-          <li data-role="fieldcontain">
-            <label for="latitude">Latitude</label>
-            <input id="latitude" name="latitude" value="{{latitude}}" type="tel">
-            <p class="error report-latitude-errors"></p>
-          </li>
-          <li data-role="fieldcontain">
-            <label for="accuracy">Accuracy</label>
-            <input id="accuracy" name="accuracy" value="{{accuracy}}" type="tel">
-            <p class="error report-accuracy-errors"></p>
-          </li>
-          <li data-role="fieldcontain">
-            <label for="notes">Notes</label>
-            <textarea name="notes" id="notes">{{notes}}</textarea>
-            <p class="error report-notes-errors"></p>
-          </li>
-          <li><p class="error report-errors"></p></li>
-          <li>
-            <div class="ui-grid-a">
-              <div class="ui-block-a">
-                <a href="{{router_info.base_url}}/" data-role="button">Cancel</a>
+          {{#id}}
+          <input type=hidden name="_method" value="PUT">
+          {{/id}}
+          <ul data-role="listview" data-inset="true">
+            <li class="ui-field-contain">
+              <label for='report-species_id'>Species</label>
+              <select id='report-species_id' data-xform-type='string' name='species_id' required>
+                <option value="">Select one...</option>
+                {{#species_list}}
+                <option value="{{id}}"{{#selected}} selected{{/selected}}>
+                 {{#outbox}}*{{/outbox}} {{label}}
+                </option>
+                {{/species_list}}
+              </select>
+              <p class='error report-species_id-errors'></p>
+            </li>
+            <li class="ui-field-contain">
+              <label for='report-date'>Date</label>
+              <input id='report-date' type='date' data-xform-type='date' name='date' required value="{{date}}">
+              <p class='error report-date-errors'></p>
+            </li>
+            <li class="ui-field-contain">
+              <fieldset data-xform-type='select1' data-role='controlgroup' data-type='horizontal'>
+                <legend>Location Mode</legend>
+                {{#toggle_choices}}
+                <input type='radio' id='report-toggle-{{name}}' name='toggle' value='{{name}}'{{#selected}} checked{{/selected}}>
+                <label for='report-toggle-{{name}}'>{{label}}</label>
+                {{/toggle_choices}}
+              </fieldset>
+              <p class='error report-toggle-errors'></p>
+            </li>
+            <li>
+              <label for='report-geometry'>Location</label>
+              <input type='hidden' data-xform-type='geopoint' name='geometry' required>
+              <div class="map edit-map" id='report-{{id}}{{^id}}new{{/id}}-edit-map'></div>
+              <p class='error report-geometry-errors'></p>
+            </li>
+            <li class="ui-field-contain">
+              <label for='report-latitude'>Latitude</label>
+              <input id='report-latitude' type='number' data-xform-type='decimal' name='latitude' step='0.000001' value="{{latitude}}">
+              <p class='error report-latitude-errors'></p>
+            </li>
+            <li class="ui-field-contain">
+              <label for='report-longitude'>Longitude</label>
+              <input id='report-longitude' type='number' data-xform-type='decimal' name='longitude' step='0.000001' value="{{longitude}}">
+              <p class='error report-longitude-errors'></p>
+            </li>
+            <li class="ui-field-contain">
+              <label for='report-accuracy'>GPS Accuracy</label>
+              <input id='report-accuracy' type='number' data-xform-type='decimal' name='accuracy' step='0.000001' value="{{accuracy}}">
+              <p class='error report-accuracy-errors'></p>
+            </li>
+            <li class="ui-field-contain">
+              <label for='report-notes'>Notes</label>
+              <textarea id='report-notes' name='notes' data-xform-type="text">{{notes}}</textarea>
+              <p class='error report-notes-errors'></p>
+            </li>
+            <li data-role="list-divider">Photos</li>
+            {{#photos}}
+            {{#id}}
+            <input type="hidden" name="photos[{{@index}}][id]" value="{{id}}">
+            {{/id}}
+            {{^file.name}}
+            <li class="ui-field-contain">
+              <img src="{{rt}}/images/empty.png"
+                   id="report-photos-{{@index}}-file-preview">
+              <label for="report-photos-{{@index}}-file">Photo</label>
+              {{#native}}
+              <input type="hidden" name="photos[{{@index}}][file]" id="report-photos-{{@index}}-file"
+                     data-wq-type="file" data-wq-preview="report-photos-{{@index}}-file-preview">
+              <div>
+                <button type="button" data-inline="true" data-icon="camera"
+                   data-wq-action="take" data-wq-input="report-photos-{{@index}}-file">
+                   Camera
+                </button>
+                <button type="button" data-inline="true" data-icon="grid"
+                   data-wq-action="pick" data-wq-input="report-photos-{{@index}}-file">
+                   Gallery
+                </button>
               </div>
-              <div class="ui-block-b">
-                <button type="submit" data-theme="b">Submit</button>
+              {{/native}}
+              {{^native}}
+              <input type="file" name="photos[{{@index}}][file]" id="report-photos-{{@index}}-file" accept='image/*'
+                     data-wq-preview="report-photos-{{@index}}-file-preview">
+              {{/native}}
+              <p class="error report-photos-{{@index}}-file-errors"></p>
+            </li>
+            {{/file.name}}
+            {{#file.name}}
+            {{#file}}
+            <li class="ui-field-contain">
+              <img src="{{image_url}}">
+              <label for="report-photos-{{@index}}-file">Photo</label>
+              <input type="text" id="report-photos-{{@index}}-file" disabled
+                  value="{{name}} ({{type}}, {{body.size}} bytes)">
+              <p class="error report-photos-{{@index}}-file-errors"></p>
+            </li>
+            {{/file}}
+            {{/file.name}}
+            <li class="section-photos"></li>
+            {{/photos}}
+            <li>
+              <button type="button" data-wq-action="addattachment" data-wq-section="photos">
+                 Add Photos
+              </button>
+            </li>
+            <li>
+              <div class="ui-grid-a">
+                <div class="ui-block-a">
+                  <a href="{{rt}}/reports/{{id}}" data-role="button" data-icon="back" data-direction="reverse">
+                    Back
+                  </a>
+                </div>
+                <div class="ui-block-b">
+                  <button type="submit" data-icon="check" data-theme="b">
+                    Submit
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-        </ul>
+              <p class="error report-errors"></p>
+            </li>
+          </ul>
         </form>
       </div>
     </div>

@@ -1,7 +1,7 @@
 *.pyc
 local_settings.py
 htdocs
-app/css/lib
-app/js/lib
-species.appcache
-rjsconf*
+lib
+themes.css
+*.appcache
+venv
