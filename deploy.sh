@@ -32,3 +32,8 @@ mv -i htdocs-build/ htdocs;
 
 # Restart Django
 touch db/speciestracker/wsgi.py
+
+# Build PhoneGap application
+cd app;
+wq phonegap $1
+cd ../;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id = "io.wq.species"
+    version = "{{version}}" >
+  <name>Species Tracker</name>
+  <description>
+    A prototype Citizen Science app for species monitoring.
+  </description>
+
+  <author href="https://wq.io" email="andrew@wq.io">
+    S. Andrew Sheppard
+  </author>
+
+  <platform name="android" />
+  <platform name="ios" />
+  <platform name="windows">
+    <preference name="windows-appx-target" value="uap" />
+    <preference name="windows-arch" value="anycpu" />
+  </platform>
+
+  <plugin name="cordova-plugin-camera" />
+  <plugin name="cordova-plugin-geolocation" />
+  <plugin name="cordova-plugin-whitelist" />
+  <access origin="*" />
+
+</widget>

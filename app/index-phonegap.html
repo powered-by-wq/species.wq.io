@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>speciestracker Project</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=yes" />
+    <link rel="stylesheet" href="css/speciestracker.css">
+    <script src="cordova.js"></script>
+    <script src="js/lib/require.js"></script>
+    <script>
+        function getBaseUrl() {
+            var baseurl = window.location.pathname.replace("index.html",'');
+            baseurl = baseurl.replace(/\/$/,'');
+            if (baseurl == 'www') {
+                // Windows
+                baseurl = '/www';
+            }
+            return baseurl;
+        }
+
+        require.config({
+            'config': {
+                'speciestracker/config': {
+                     'router': {
+                         'base_url': getBaseUrl()
+                     },
+                     'store': {
+                         'service': 'http://species.wq.io',
+                         'defaults': {'format': 'json'}
+                     },
+                }
+            }
+        });
+        require(['js/speciestracker'], function() {
+            require(['speciestracker/main', 'wq/app'], function(ready, app) {
+                ready.then(function() {
+                    app.replaceState('');
+                });
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <p style='text-align: center'>
+      <a href="./">
+        <img src='images/icon-512.png' style='max-width: 80%;'>
+      </a>
+    </p>
+    <p class="footer">
+      speciestracker v{{version}}
+      &bull;
+      Powered by <a href="https://wq.io/">wq</a>
+    </p>
+  </body>
+</html>

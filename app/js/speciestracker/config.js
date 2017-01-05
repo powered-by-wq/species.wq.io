@@ -5,7 +5,7 @@ var overrides = module.config();
 
 config.router = {
     'base_url': ''
-}
+};
 
 config.template = {
     'templates': templates,
@@ -20,7 +20,7 @@ config.template = {
 config.store = {
     'service': config.router.base_url,
     'defaults': {'format': 'json'}
-}
+};
 
 config.outbox = {};
 
