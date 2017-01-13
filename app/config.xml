@@ -12,15 +12,32 @@
     S. Andrew Sheppard
   </author>
 
-  <platform name="android" />
-  <platform name="ios" />
+  <platform name="android">
+    {{#android.icons}}
+    <icon src="{{filename}}" density="{{alias}}" />
+    {{/android.icons}}
+  </platform>
+
+  <platform name="ios">
+    {{#ios.icons}}
+    <icon src="{{filename}}" width="{{width}}" height="{{height}}" />
+    {{/ios.icons}}
+  </platform>
+
   <platform name="windows">
-    <preference name="windows-appx-target" value="uap" />
+    <preference name="windows-appx-target" value="8.1-phone" />
     <preference name="windows-arch" value="anycpu" />
+    {{#windows.icons}}
+    <icon src="{{filename}}" width="{{width}}" height="{{height}}" />
+    {{/windows.icons}}
+    {{#windows-splash.icons}}
+    <splash src="{{filename}}" width="{{width}}" height="{{height}}" />
+    {{/windows-splash.icons}}
   </platform>
 
   <plugin name="cordova-plugin-camera" />
   <plugin name="cordova-plugin-geolocation" />
+  <plugin name="cordova-plugin-dialogs" />
   <plugin name="cordova-plugin-whitelist" />
   <access origin="*" />
 

@@ -1,6 +1,6 @@
 define(['wq/app', 'wq/map', 'wq/patterns', 'wq/photos', 'wq/locate',
         './config',
-        'leaflet.draw'],
+        'leaflet.draw', 'leaflet.markercluster'],
 function(app, map, patterns, locate, photos, config) {
 
 app.use(map);
