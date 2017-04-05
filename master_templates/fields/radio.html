@@ -1,6 +1,6 @@
 {{=[[ ]]=}}
 <li class="ui-field-contain">
-  <fieldset data-xform-type='select1' data-role='controlgroup'[[^more_than_5_choices]] data-type='horizontal'[[/more_than_5_choices]]>
+  <fieldset data-xform-type='[[type]]' data-role='controlgroup'[[^more_than_5_choices]] data-type='horizontal'[[/more_than_5_choices]]>
     <legend>[[label]]</legend>
     {{#[[name]]_choices}}
     <input type='radio' id='[[form.name]]-[[field_id]]-{{name}}' name='[[field_formname]]' value='{{name}}'{{#selected}} checked{{/selected}}>

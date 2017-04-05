@@ -7,7 +7,6 @@ rest.router.register_model(
     Report,
     serializer=ReportSerializer,
     fields="__all__",
-    reversed=True,
     locate=True,
     map=[{
         'mode': 'list',

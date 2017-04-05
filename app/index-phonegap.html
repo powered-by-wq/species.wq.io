@@ -6,49 +6,39 @@
     <link rel="stylesheet" href="css/speciestracker.css">
     <script src="cordova.js"></script>
     <script src="js/lib/require.js"></script>
-    <script>
-        function getBaseUrl() {
-            var baseurl = window.location.pathname.replace("index.html",'');
-            baseurl = baseurl.replace(/\/$/,'');
-            if (baseurl == 'www') {
-                // Windows
-                baseurl = '/www';
-            }
-            return baseurl;
-        }
-
-        require.config({
-            'config': {
-                'speciestracker/config': {
-                     'router': {
-                         'base_url': getBaseUrl()
-                     },
-                     'store': {
-                         'service': 'https://species.wq.io',
-                         'defaults': {'format': 'json'}
-                     },
-                }
-            }
-        });
-        require(['js/speciestracker'], function() {
-            require(['speciestracker/main', 'wq/app'], function(ready, app) {
-                ready.then(function() {
-                    app.replaceState('');
-                });
-            });
-        });
-    </script>
+    <script src="js/pginit.js"></script>
   </head>
-  <body>
-    <p style='text-align: center'>
-      <a href="./">
-        <img src='images/icon-512.png' style='max-width: 80%;'>
-      </a>
-    </p>
-    <p class="footer">
-      speciestracker v{{version}}
-      &bull;
-      Powered by <a href="https://wq.io/">wq</a>
-    </p>
+  <body class="ui-mobile">
+    <div class="ui-page ui-page-active ui-page-theme-a" style="visibility:visible;">
+      <div role="banner" class="ui-header ui-bar-inherit">
+        <h1 class="ui-title" role="heading" aria-level="1">Species Tracker</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+          <li class="ui-first-child">
+            <a href="#" class="ui-btn ui-btn-icon-right ui-icon-plus">Share Report</a>
+          </li>
+          <li>
+            <a href="#" class="ui-btn ui-btn-icon-right ui-icon-bullets">See Reports</a>
+          </li>
+          <li class="ui-last-child">
+            <a href="#" class="ui-btn ui-btn-icon-right ui-icon-info">Species Descriptions</a>
+          </li>
+        </ul>
+        <div class="map detail-map"></div>
+        <p>Version {{version}}</p>
+        <p style="text-align:center">
+          <a href="#" class="ui-link">
+            Source Code
+          </a>
+        </p>
+        <p style="text-align:center;color:#999">
+          Powered By
+	  <a href="#" class="ui-link">
+            <img src="images/wq.png" style="width:32px;height:32px;vertical-align:middle;">
+          </a>
+	</p>
+      </div>
+    </div>
   </body>
 </html>
