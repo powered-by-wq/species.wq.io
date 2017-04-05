@@ -59,6 +59,11 @@
             {{#unsynced}}
             <li data-role="list-divider">Synced Items</li>
             {{/unsynced}}
+            {{^unsynced}}
+            {{#current_is_local}}
+            <li data-role="list-divider">Recent Items</li>
+            {{/current_is_local}}
+            {{/unsynced}}
             {{#list}}
             <li>
               <a href="{{rt}}/species/{{id}}">
@@ -79,6 +84,11 @@
               <a href="{{rt}}/species/new{{#parent_id}}?{{parent_page}}_id={{parent_id}}{{/parent_id}}">Add species</a>
             </li>
             {{/page_config.can_add}}
+            {{#current_is_local}}
+            <li data-icon="clock">
+              <a href="{{rt}}/species/?page=1">Older Items</a>
+            </li>
+            {{/current_is_local}}
           </ul>
       </div>
       {{>paginator}}

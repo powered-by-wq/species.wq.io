@@ -64,6 +64,11 @@
             {{#unsynced}}
             <li data-role="list-divider">Synced Items</li>
             {{/unsynced}}
+            {{^unsynced}}
+            {{#current_is_local}}
+            <li data-role="list-divider">Recent Items</li>
+            {{/current_is_local}}
+            {{/unsynced}}
             {{#list}}
             <li>
               <a href="{{rt}}/[[form.urlpath]]/{{id}}">
@@ -84,6 +89,11 @@
               <a href="{{rt}}/[[form.urlpath]]/new{{#parent_id}}?{{parent_page}}_id={{parent_id}}{{/parent_id}}">Add [[form.title]]</a>
             </li>
             {{/page_config.can_add}}
+            {{#current_is_local}}
+            <li data-icon="clock">
+              <a href="{{rt}}/[[form.urlpath]]/?page=1">Older Items</a>
+            </li>
+            {{/current_is_local}}
           </ul>
         [[#form.has_geo]]
         </div>

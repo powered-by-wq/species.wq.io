@@ -61,6 +61,11 @@
             {{#unsynced}}
             <li data-role="list-divider">Synced Items</li>
             {{/unsynced}}
+            {{^unsynced}}
+            {{#current_is_local}}
+            <li data-role="list-divider">Recent Items</li>
+            {{/current_is_local}}
+            {{/unsynced}}
             {{#list}}
             <li>
               <a href="{{rt}}/reports/{{id}}">
@@ -81,6 +86,11 @@
               <a href="{{rt}}/reports/new{{#parent_id}}?{{parent_page}}_id={{parent_id}}{{/parent_id}}">Add report</a>
             </li>
             {{/page_config.can_add}}
+            {{#current_is_local}}
+            <li data-icon="clock">
+              <a href="{{rt}}/reports/?page=1">Older Items</a>
+            </li>
+            {{/current_is_local}}
           </ul>
         </div>
         <div class="ui-block-b">
